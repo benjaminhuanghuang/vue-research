@@ -18,11 +18,36 @@ export function compileToFunction(template) {
   return function render() {};
 }
 
+function start(tagName, attrs) {}
+
+function chars() {}
+
+function end(tagName){}
+
+
 function parseHTML(html) {
   while (html) {
     let textEnd = html.indexOf("<");
     if (textEnd === 0) {
       let startTagMatch = parseStartTag(); // tagName, attr
+      if (startTagMatch) {
+        start(startTagMath.tagName, startTagMatch.attrs);
+        continue;
+      }
+      let endTagMatch = html.match(endTag);
+      if (endTagMath) {
+        advance(endTagMatch[0].length);
+        end(endTagMatch[1]);
+        continue;
+      }
+    }
+    let text;
+    if (textEnd >= 0) {
+      text = html.substring(0, textEnd);
+    }
+    if (text) {
+      advance(text.length);
+      chars(text);
     }
   }
   function advance(n) {
@@ -44,7 +69,7 @@ function parseHTML(html) {
         match.attrs.push({ name: attr[1], value: attr[3] || attr[4] || attr[5] });
       }
 
-      if(end){
+      if (end) {
         // remove > of startTag
         advance(end[0].length);
         return match;
