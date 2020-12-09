@@ -3,9 +3,7 @@
 */
 import {initMixin} from './init'
 
-console.log('Vue....')
 function  Vue(options){
-  debugger
   console.log(options)
 }
 
