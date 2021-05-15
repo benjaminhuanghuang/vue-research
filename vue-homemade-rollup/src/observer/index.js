@@ -6,7 +6,13 @@ import {arrayMethods} from './array.js'
 class Observer {
   constructor(value) {
     value.__ob__ = this;
-    
+    //避免递归
+    Object.defineProperty(value, '__ob__', {
+      enumerable:false,
+      configurable: false,
+      value: this
+    })
+
     if (Array.isArray(value)) {
       // hijack itmes in array
       this.observeArray(value);
