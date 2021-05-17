@@ -2,3 +2,6 @@
 https://www.bilibili.com/video/BV1qt4y1y7e8/?p=2
 
 
+- Vuex从入门到实战
+https://www.bilibili.com/video/BV1h7411N7bg?p=17&spm_id_from=pageDriver
+
