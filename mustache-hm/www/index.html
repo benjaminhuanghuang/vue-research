@@ -7,6 +7,36 @@
 </head>
 <body>
   <h1>Hello</h1>
+  <div id="container"></div>
   <script src="/xuni/bundle.js"></script>
+
+  <script>
+    const template = `
+      <div>
+        <ol>
+          {{#students}}
+          <li>
+            {{name}}
+            <ol>
+              {{#hobbies}}
+            </ol>
+          </li>  
+          {{/students}}
+        </ol>
+      </div>
+    `
+
+    const data = {
+      students:[
+        {name: 'Alen', hobbies:['box', 'bjj']},
+        {name: 'Ben', hobbies:['ufc', 'bjj']}
+      ] 
+    };
+
+    var domStr = SSG_TemplateEngine.render(templateStr, data);
+    var container = document.getElementById('container');
+    container.innerHTML = domStr;
+  
+  </script>
 </body>
 </html>
