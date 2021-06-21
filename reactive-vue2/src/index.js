@@ -1,27 +1,27 @@
-import defineProperties = require("define-properties");
-import Observer from './observer'
-
-
+import observe from "./observe.js";
 
 var obj = {
   a: {
     m: {
-      n:5
-    }
-  }
+      n: 5,
+    },
+  },
+  b: 10,
+  c: {
+    d: {
+      e: {
+        f: 6666,
+      },
+    },
+  },
+  g:[1,2,3]
 };
 
+observe(obj);
 
-function observe(value){
-  if(typeof value != 'object')
-  return;
 
-  var ob;
-  if(typeof value.__ob__ != 'undefined'){
-    ob = value.__ob__;
-  }
-  else{
-    ob = new Obserever(value);
-  }
-  return ob;
-}
+obj.a.m =10;
+console.log(obj.c.d.e.f);
+
+
+obj.g.push(6);
