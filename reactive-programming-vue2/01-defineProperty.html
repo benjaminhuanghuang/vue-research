@@ -8,6 +8,7 @@
 </head>
 
 <body>
+  <span id="text"></span>
   <script>
     const data = {};
     let name = 'Vue';
@@ -20,8 +21,12 @@
       },
       set: function (val) {
         console.log('set')
-        name = val
+        name = val;
+
+
         // render 
+        const elem = document.getElementById("text");
+        elem.innerText = val  ;
       }
     })
 
