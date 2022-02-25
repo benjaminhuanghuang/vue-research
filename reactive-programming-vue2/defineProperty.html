@@ -1,0 +1,36 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const data = {};
+    let name = 'Vue';
+
+
+    Object.defineProperty(data, 'name', {
+      // intercept the access to data.name
+      get: function () {
+        return name;
+      },
+      set: function (val) {
+        console.log('set')
+        name = val
+        // render 
+      }
+    })
+
+    console.log("data.name:", data.name);
+
+
+    data.name = 'new'
+    console.log("data.name:", data.name);
+  </script>
+</body>
+
+</html>

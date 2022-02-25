@@ -1,0 +1,49 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const data = {
+      name: 'ben',
+      age: 100
+    };
+
+    function observer(target) {
+      if (typeof target !== 'object' || target == null) {
+        return target;
+      }
+
+      for (let key in target) {
+        defineReactive(target, key, target[key])
+      }
+
+    }
+
+    function defineReactive(target, key, val) {
+      Object.defineProperty(target, key, {
+        get() {
+          return value;
+        },
+        set(newVal) {
+          if (newVal != val) {
+            val = newVal;
+            //
+            console.log('render UI')
+          }
+        }
+      })
+    }
+
+    observer(data);
+
+    data.name = "New"
+  </script>
+</body>
+
+</html>
