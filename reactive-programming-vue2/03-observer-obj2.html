@@ -1,0 +1,64 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const data = {
+      name: 'ben',
+      age: 100,
+      friend:{
+        name:'lele'
+      }
+    };
+
+    function observer(target) {
+      if (typeof target !== 'object' || target == null) {
+        return target;
+      }
+
+      for (let key in target) {
+        defineReactive(target, key, target[key])
+      }
+
+    }
+
+    function defineReactive(target, key, val) {
+      // observer object field  
+      observer(val);
+
+      Object.defineProperty(target, key, {
+        get() {
+          return val;
+        },
+        set(newVal) {
+          // 针对case  
+          // data.age = {number: 50}
+          // data.age.number =51
+          observer(newVal);
+
+          if (newVal != val) {
+            val = newVal;
+            //
+            console.log('render UI')
+          }
+        }
+      })
+    }
+
+    observer(data);
+
+    data.friend.name = "New";
+
+    /*
+      还需要Vue.delete , Vue.set 处理delete， set filed
+    */
+  </script>
+</body>
+
+</html>

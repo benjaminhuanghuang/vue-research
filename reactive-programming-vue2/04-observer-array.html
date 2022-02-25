@@ -1,0 +1,70 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const data = {
+      name: 'ben',
+      age: 100,
+      colors : ['red', 'black']
+    };
+
+    const oldArrayProto = Array.prototype;
+    // create an object, object.__proto__ 指向oldArrayProto
+    const newArrProto = Object.create(oldArrayProto);
+    ['push', 'pop', 'shift'].forEach(method =>{
+      newArrProto[method] = function() {
+        oldArrayProto[method].call(this, ...arguments)
+        console.log('render UI')
+      }
+
+    })
+    
+    function observer(target) {
+      if (typeof target !== 'object' || target == null) {
+        return target;
+      }
+    
+      if(Array.isArray(target)){
+        target.__proto__ = newArrProto;
+      }
+      for (let key in target) {
+        defineReactive(target, key, target[key])
+      }
+
+    }
+    function defineReactive(target, key, val) {
+      // observer object field  
+      observer(val);
+
+      Object.defineProperty(target, key, {
+        get() {
+          return val;
+        },
+        set(newVal) {
+          // 针对case  
+          // data.age = {number: 50}
+          // data.age.number =51
+          observer(newVal);
+
+          if (newVal != val) {
+            val = newVal;
+            //
+            console.log('render UI')
+          }
+        }
+      })
+    }
+
+    observer(data);
+    data.colors.push("pushColor");
+  </script>
+</body>
+
+</html>
