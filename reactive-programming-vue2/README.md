@@ -1,3 +1,6 @@
+- What is 响应式:
+
+Data changes case UI changes
 
 ## Reference
 https://cn.vuejs.org/v2/guide/reactivity.html
